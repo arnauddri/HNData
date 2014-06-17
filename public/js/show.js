@@ -1,5 +1,6 @@
 var isTopKeywordsShown = false,
     isSubmissionShown = false,
+    isKarmaShown = false,
     isTopSourcesShown = false;
 
 $('#p0 .next').click(function() {
@@ -22,3 +23,10 @@ $('#p2 .next').click(function() {
   showTopSources();
   isTopSourcesShown = true;
 });
+
+// $('#p3 .next').click(function() {
+//   if (isKarmaShown) return;
+  
+  showUserKarma();
+//   isKarmaShown = true;
+// });

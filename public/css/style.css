@@ -50,6 +50,19 @@ body {
 	scrollbar-shadow-color: #fff;
 	scrollbar-dark-shadow-color: #fff;
 }
+
+h3 {
+  font-family: "Proxima-Bold";
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 18px;
+  text-align: center;
+  line-height: 16px;
+}
+
+/* Slides */
+
+
 #slides .page:nth-child(1) {
 	z-index: 10;
 	color: #F08641;
@@ -238,11 +251,6 @@ body {
 }
 
 #occurences h3 {
-	text-align: center;
-  font-size: 18px;
-  line-height: 16px;
-  color: #7f8c8d;
-  font-family: "Proxima-Bold";
   margin-top: 20px;
 }
 
@@ -267,11 +275,6 @@ body {
 }
 
 #sources h3 {
-  text-align: center;
-  font-size: 18px;
-  line-height: 16px;
-  color: #7f8c8d;
-  font-family: "Proxima-Bold";
   margin-top: 20px;
 }
 
@@ -302,10 +305,22 @@ body {
 	color: #fff;
 }
 
-#share h3 {
-  font-family: "Proxima-Bold";
-  text-align: center;
-  color: #7f8c8d;
+/* Karma */
+#karma h1 {
+  margin-top: 40px;
+}
+
+#karma .axis path, #karma .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#karma #karma-chart svg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
 }
 
 /* Radio Buttons */
