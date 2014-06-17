@@ -146,8 +146,6 @@ function showUserKarma() {
           d0 = data[i - 1],
           d1 = data[i],
           d = x0 - d0.karma > d1.karma - x0 ? d1 : d0;
-
-      console.log(d.distribution, x0);
       
       svg.selectAll("circle")
           .attr("cx", function(d) { return mouseX; }) 
