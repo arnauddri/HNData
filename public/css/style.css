@@ -1,0 +1,354 @@
+@font-face {
+    font-family: 'Proxima-Black'; /*a name to be used later*/
+    src: url('../css/fonts/Proxima/ProximaNova-Black.otf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'Proxima-Regular'; /*a name to be used later*/
+    src: url('../css/fonts/Proxima/ProximaNova-Regular.otf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'Proxima-Light'; /*a name to be used later*/
+    src: url('../css/fonts/Proxima/ProximaNova-Light.otf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'ProximaCond-Light'; /*a name to be used later*/
+    src: url('../css/fonts/Proxima/ProximaNovaCond-Light.otf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'Proxima-Bold'; /*a name to be used later*/
+    src: url('../css/fonts/Proxima/ProximaNova-Bold.otf'); /*URL to font*/
+}
+html {
+	overflow-y: scroll;
+}
+html,body {
+	margin:0;
+	padding:0;
+	background-color: #fff;
+
+	font-family: 'PT Sans', sans-serif;
+	color: #F08641;
+	font-size:14px;
+
+	height: 100%;
+}
+a {
+	color:#8fd4d9;
+}
+a:hover {
+	color:#CC1559;
+}
+::-webkit-scrollbar-thumb:vertical { width:10px; height:10px; background-color: #666; }
+::-webkit-scrollbar { width:10px; height:5px; background: #fff; margin-right:5px; }
+body {
+	scrollbar-base-color: #fff;
+	scrollbar-base-color: #666;
+	scrollbar-3dlight-color: #fff;
+	scrollbar-highlight-color: #fff;
+	scrollbar-track-color: #fff;
+	scrollbar-arrow-color: #666;
+	scrollbar-shadow-color: #fff;
+	scrollbar-dark-shadow-color: #fff;
+}
+#slides .page:nth-child(1) {
+	z-index: 10;
+	color: #F08641;
+}
+#slides .page:nth-child(2) {
+	z-index: 9;
+	color: #F08641;
+}
+#slides .page:nth-child(3) {
+	z-index: 8;
+}
+#slides .page:nth-child(4) {
+	z-index: 7;
+	color: #F08641;
+}
+#slides .page:nth-child(5) {
+	z-index: 6;
+}
+.page {
+	width: 100%;
+	background-color: #fff;
+	position: absolute;
+	height: 0;
+	overflow: hidden;
+	
+	-webkit-transition: height 0.9s ease;
+	-moz-transition: height 0.9s ease;
+	-o-transition: height 0.9s ease;
+	transition: height 0.9s ease;
+
+	-webkit-transform: translateZ(0);
+	-moz-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	-o-transform: translateZ(0);
+	transform: translateZ(0);
+
+	box-shadow: 8px 8px 0px #aaa; 
+}
+.page h1{
+	font-family: "Proxima-Bold";
+	text-align: center;
+	margin-top: 20%;
+}
+.page.active {
+	height: 100%;
+}
+.page .control-container {
+	position: absolute;
+	bottom:40px;
+	height:60px;
+	bottom: 0px;
+	width: 100%;
+}
+.page .next {
+	display: inline-block;
+	position: absolute;
+	bottom:40px;
+	height:60px;
+	right: 0px;
+	width: 50%;
+	text-align: left;
+}
+.page .next a {
+	color:inherit;
+	font-size: 20px;
+	margin-left: 20px;
+}
+.page .next a:hover {
+	text-decoration: none;
+}
+#next0 {
+	position: absolute;
+	bottom:40px;
+	height:60px;
+	width: 100%;
+	text-align: center;
+}
+.page .previous {
+	display: inline-block;
+	position: absolute;
+	bottom:40px;
+	height:60px;
+	left: 0px;
+	width: 50%;
+	text-align: right;
+}
+.page .previous a {
+	color:inherit;
+	font-size: 20px;
+	margin-right: 20px;
+}
+.page .previous a:hover {
+	text-decoration: none;
+}
+.page .previous span, .page .next span {
+	border: solid 4px;
+	border-radius: 50%;
+	padding: 10px;
+}
+
+#previous0 {
+	position: absolute;
+	bottom:40px;
+	height:60px;
+	width: 100%;
+	text-align: center;
+}
+
+/* P0 */
+#p0 .row .container {
+	text-align: center;
+	position: relative;
+}
+
+#p0 .row .container > div {
+	display: inline-block;
+	margin-top: 12%;
+	position: relative;
+}
+
+#p0 .title-container {
+	padding-top: 100px;
+	text-align: left;
+}
+
+#p0 .title-container h1 {
+	margin-bottom: 5px;
+	margin-top: 0px;
+	text-align: left;
+}
+
+#p0 img {
+	width: 100px;
+	margin-right: 60px;
+	margin-top: -55px;
+}
+
+/* P1 */
+#p1 h1 {
+	margin-top: 40px;
+}
+
+#p1 #bar-chart svg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+}
+
+#p1 .axis path, #p1 .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+#p1 .x.axis path, #p1 .y.axis path {
+	display: none;
+}
+
+#p1 .axis .tick{
+  fill: #000;
+  font-size: 14px;
+  font-family: 'Proxima-Light'
+}
+
+#p1 .chart-picker {
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+
+}
+
+#p1 .chart-picker form {
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
+	margin-left: 38%;
+	margin-top: 30px;
+}
+
+/* P2 */
+#p2 h1 {
+	margin-top: 40px;
+}
+
+#p2 h3 {
+	text-align: center;
+  font-size: 18px;
+  line-height: 16px;
+  color: #7f8c8d;
+  font-family: "Proxima-Bold";
+  margin-top: 20px;
+}
+
+#p2 > div {
+	display: inline-block;
+}
+
+#p2 #g-chart {
+	position: absolute;
+	left: 35%;
+}
+
+#p2 #g-bar-chart {
+	position: absolute;
+	left: 10%;
+	top: 30%;
+}
+
+/* P3 */
+#p3 h1 {
+  margin-top: 40px;
+}
+
+#p3 h3 {
+  text-align: center;
+  font-size: 18px;
+  line-height: 16px;
+  color: #7f8c8d;
+  font-family: "Proxima-Bold";
+  margin-top: 20px;
+}
+
+#p3 #hori-bar svg {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+/* P4 */
+#p4 .share {
+	margin-top: 40px;
+	text-align: center;
+	font-size: 36px;
+}
+
+#p4 .share i, #p4 .share div {
+	display: inline-block;
+	margin-right: 20px;
+	padding-top: 14px;
+	background-color: #F08641;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+
+#p4 .share a {
+	color: #fff;
+}
+
+#p4 h3 {
+  font-family: "Proxima-Bold";
+  text-align: center;
+  color: #7f8c8d;
+}
+
+/* Radio Buttons */
+#radio-demo * {
+	cursor: pointer;
+}
+#radio-demo input[type="radio"] {
+   position:absolute;
+   opacity: 0;
+   -moz-opacity: 0;
+   -webkit-opacity: 0;
+   -o-opacity: 0;
+}
+#radio-demo input[type="radio"] + label {
+   position:relative;
+   padding: 0 0 0 25px;
+   font-size: 18px;
+   line-height: 16px;
+}
+#radio-demo input[type="radio"] + label:before {
+   content:"";
+   display: inline-block;
+   position: absolute;
+   top: 0px;
+   height: 14px;
+   width: 14px;
+   background: white;
+   border: 2px solid #F08641;
+   box-shadow: inset 0px 0px 0px 2px white;
+   -webkit-box-shadow: inset 0px 0px 0px 2px white;
+   -moz-box-shadow: inset 0px 0px 0px 2px white;
+   -o-box-shadow: inset 0px 0px 0px 2px white;
+   -webkit-border-radius: 8px;
+   -moz-border-radius: 8px;
+   -o-border-radius: 8px;
+}
+#radio-demo input[type="radio"]:checked + label:before {
+   background: #ef8700;
+}
+#radio-demo label:before {
+   left: 6px;
+}
+#radio-demo label {
+   font-size: 18px;
+  color: #7f8c8d;
+}
