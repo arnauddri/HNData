@@ -141,7 +141,7 @@ var activeUserChart = function() {
     svg.selectAll(".bar.submissions")
         .transition()
         .duration(500)
-        .style("fill", "#f8c2a3");
+        .style("fill", "#fbd5bf");
 
     svg.selectAll(".bar.users")
         .data(data)
