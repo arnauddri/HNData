@@ -59,20 +59,21 @@ function showUserKarma() {
         .style("text-anchor", "end");
 
     // Append centile, karma and distribution on chart
-    var legendX =  width - 250;
-    var legendY =  40;
+    var legendX =  width * 0.6;
+    var deltaX = 200;
+    var legendY =  60;
 
     svg.append("text")
         .attr("class", "centile")
         .attr("x", legendX)
-        .attr("y", legendY + 40)
+        .attr("y", legendY + 50)
         .attr("text-anchor", "start")
         .text("Centile:");
 
     svg.append("text")
         .attr("class", "centile-figure")
-        .attr("x", legendX + 180)
-        .attr("y", legendY + 40)
+        .attr("x", legendX + deltaX)
+        .attr("y", legendY + 50)
         .attr("text-anchor", "end")
         .text("0");
 
@@ -85,7 +86,7 @@ function showUserKarma() {
 
     svg.append("text")
         .attr("class", "karma-figure")
-        .attr("x", legendX + 180)
+        .attr("x", legendX + deltaX)
         .attr("y", legendY)
         .attr("text-anchor", "end")
         .text("0");
@@ -93,14 +94,14 @@ function showUserKarma() {
     svg.append("text")
         .attr("class", "distribution")
         .attr("x", legendX)
-        .attr("y", legendY + 20)
+        .attr("y", legendY + 25)
         .attr("text-anchor", "start")
         .text("# of persons:");
 
     svg.append("text")
         .attr("class", "distribution-figure")
-        .attr("x", legendX + 180)
-        .attr("y", legendY + 20)
+        .attr("x", legendX + deltaX)
+        .attr("y", legendY + 25)
         .attr("text-anchor", "end")
         .text("0");
 
