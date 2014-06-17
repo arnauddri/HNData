@@ -33,69 +33,84 @@
 
   <body>
     <div id='slides'>
+
       <div id="p0" class="page active">
-        <div class="row">
-          <div class="container">
-            <div><img src="images/yc.gif"></div>
-            <div class="title-container">
-              <h1>HACKER NEWS:</h1>
-              <h1>Crunching the numbers</h1></div>
+        <div id="home">
+          <div class="row">
+            <div class="container">
+              <div><img src="images/yc.gif"></div>
+              <div class="title-container">
+                <h1>HACKER NEWS:</h1>
+                <h1>Crunching the numbers</h1></div>
+            </div>
           </div>
+          <div id="next0" class="next"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
         </div>
-        <div id="next0" class="next"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></div>  
       </div>
+
       <div id="p1" class="page active">
-        <h1>HN's submissions increase steadily</h1>
-        <div class="chart-picker">
-          <form id="radio-demo"> 
-            <label>Show: </label>
-            <input type="radio" name="radio-group" id="first-choice" value="First Choice" onclick="submissionChart()" checked="true" />
-            <label for="first-choice" onclick="submissionChart()">User's Submissions</label>
-            <input type="radio" name="radio-group" id="second-choice" value="Second Choice" onclick="activeUserChart()"/>
-            <label for="second-choice" onclick="activeUserChart()">Active Users</label>
-          </form>
-        </div>
-        <div id="bar-chart"></div>
-        <div class="control-container">
-          <div class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
-          <div class="next"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
-        </div>
-      </div>
-      <div id="p2" class="page active">
-        <h1>Bitcoins are more popular than Facebook on HN</h1>
-        <h3>Word occurences in Submitions Titles - Q2 2013 - Q1 2014</h3>
-        <div id='g-bar-chart'>
-            <svg class="g-bars"></svg>
-        </div>
-        <div id='g-chart'>
-            <svg class="g-nodes"></svg>
-            <div class="g-labels"></div>
-        </div>
-        <div class="control-container">
-          <div class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
-          <div class="next"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
-        </div>
-      </div>
-      <div id="p3" class="page active">
-        <h1>Sam Altman's blog receives amazing support from the community</h1>
-        <h3>Most popular Sources on HN - based on the average number of upvotes for Q1 2014</h3>
-        <div id="hori-bar"></div>
-        <div class="control-container">
-          <div class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
-          <div class="next"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
-        </div>
-      </div>
-      <div id="p4" class="page active">
-        <h1>Thanks for reading!</h1>
-        <h3>Your likes and shares make me happy</h3>
-        <div class="share">
-          <!-- <a href=""><div>Y</div></a> -->
-          <a href=""><i class="fa fa-facebook"></i></a>
-          <a href=""><i class="fa fa-twitter"></i></a>
-          <a href=""><i class="fa fa-reddit"></i></a>
-          <a href=""><i class="fa fa-linkedin"></i></a>
+        <div id="submissions">
+          <h1>HN's submissions increase steadily</h1>
+          <div class="chart-picker">
+            <form id="radio-demo"> 
+              <label>Show: </label>
+              <input type="radio" name="radio-group" id="first-choice" value="First Choice" onclick="submissionChart()" checked="true" />
+              <label for="first-choice" onclick="submissionChart()">User's Submissions</label>
+              <input type="radio" name="radio-group" id="second-choice" value="Second Choice" onclick="activeUserChart()"/>
+              <label for="second-choice" onclick="activeUserChart()">Active Users</label>
+            </form>
           </div>
-        <div id="previous0" class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+          <div id="bar-chart"></div>
+          <div class="control-container">
+            <div class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+            <div class="next"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="p2" class="page active">
+        <div id="occurences">
+          <h1>Bitcoins are more popular than Facebook on HN</h1>
+          <h3>Word occurences in Submitions Titles - Q2 2013 - Q1 2014</h3>
+          <div id='g-bar-chart'>
+              <svg class="g-bars"></svg>
+          </div>
+          <div id='g-chart'>
+              <svg class="g-nodes"></svg>
+              <div class="g-labels"></div>
+          </div>
+          <div class="control-container">
+            <div class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+            <div class="next"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="p3" class="page active">
+        <div id="sources">
+          <h1>Sam Altman's blog receives amazing support from the community</h1>
+          <h3>Most popular Sources on HN - based on the average number of upvotes for Q1 2014</h3>
+          <div id="hori-bar"></div>
+          <div class="control-container">
+            <div class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+            <div class="next"><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="p4" class="page active">
+        <div id="share">
+          <h1>Thanks for reading!</h1>
+          <h3>Your likes and shares make me happy</h3>
+          <div class="share">
+            <!-- <a href=""><div>Y</div></a> -->
+            <a href=""><i class="fa fa-facebook"></i></a>
+            <a href=""><i class="fa fa-twitter"></i></a>
+            <a href=""><i class="fa fa-reddit"></i></a>
+            <a href=""><i class="fa fa-linkedin"></i></a>
+            </div>
+          <div id="previous0" class="previous"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></div>
+        </div>
       </div>
     </div>
 
