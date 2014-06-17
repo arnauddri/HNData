@@ -32,7 +32,6 @@ function showUserKarma() {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-
   var bisectAbsciss = d3.bisector(function(d) { return d.karma; }).left;
 
   d3.csv("./data/karma/karma.csv", karmaType, function(error, data) {
@@ -155,10 +154,13 @@ function showUserKarma() {
         .text(d.centile + "");
 
       svg.selectAll(".karma-figure")
-        .text(function() { return (d.karma < 10) ? " < 10" : d.karma; });
+        .text(function() { 
+          if (d.karma === 1000) return "> 1000";
+          return (d.karma < 10) ? " < 10" : d.karma + ' - ' + Math.floor(d.karma + 10); 
+        });
 
       svg.selectAll(".distribution-figure")
-        .text(d.distribution);
+        .text(function() { return (d.karma === 1000) ? 5423 : d.distribution; });
 
       // user is interacting
       userCurrentlyInteracting = true;

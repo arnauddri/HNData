@@ -107,11 +107,48 @@ var showSubmissionChart = function() {
           d3.select(this)
             .text('');
       });
+
+    svg.append("line")
+        .attr("class", "growth-line")
+        .attr("x1", x("Q1 '07"))
+        .attr("y1", y(0))
+        .attr("x2", x("Q1 '14"))
+        .attr("y2", y(0))
+        .transition()
+        .duration(800)
+        .attr("y1", y(20683))
+        .attr("y2", y(490379))
+        .style("stroke", "#999")
+        .style("opacity", 0.6)
+        .style("stroke-width", "3px");
+
+    svg.append("g")
+        .attr("class", "growth-container")
+        .attr("transform", "translate(" + width * 0.4 + ", 120 )");
+        // .append("circle")
+        // .attr("r", 40)
+        // .style("fill", "rgba(255, 255, 255, 0.4")
+        // .style("stroke", "#999")
+        // .style("stroke-width", "3px");
+
+    svg.selectAll(".growth-container")
+        .append("text")
+        .attr("class", "cagr")
+        .text('CAGR: 54.3 %');
   });
 }
 
 var submissionChart = function() {
   d3.csv("./data/bar/submissions.csv", function(error, data) {
+
+    data.forEach(function(d) {
+      var y0 = 0;
+      d.ages = color.domain().map(function(name) { return {name: name, y0: y0, y1: y0 += +d[name]}; });
+      d.total = d.ages[d.ages.length - 1].y1;
+    });
+
+    x.domain(data.map(function(d) { return d.Quarter; }));
+    y.domain([0, d3.max(data, function(d) { return d.total; })]);
     svg.selectAll(".bar.submissions")
         .transition()
         .duration(500)
@@ -123,11 +160,22 @@ var submissionChart = function() {
         .attr("y", function(d) { return height; })
         .attr("height", function(d) { return 0; });
 
+    svg.selectAll(".growth-line")
+        .transition()
+        .duration(500)
+        .attr("y1", y(20683))
+        .attr("y2", y(490379));
+
+    svg.selectAll(".growth-container text")
+        .text("CAGR: 54.3 %");
+
   });
 }
 
 var activeUserChart = function() {
   d3.csv("./data/bar/active_users.csv", type, function(error, data) {
+    x.domain(data.map(function(d) { return d.Quarter; }));
+    y.domain([0, d3.max(data, function(d) { return d.Users; })]);
     svg.selectAll(".userbar")
         .data(data)
       .enter().append("rect")
@@ -141,7 +189,7 @@ var activeUserChart = function() {
     svg.selectAll(".bar.submissions")
         .transition()
         .duration(500)
-        .style("fill", "#fbd5bf");
+        .style("fill", "#fff");
 
     svg.selectAll(".bar.users")
         .data(data)
@@ -149,6 +197,15 @@ var activeUserChart = function() {
         .duration(500)
         .attr("y", function(d) { return y(d.Users); })
         .attr("height", function(d) { return height - y(d.Users); });
+
+    svg.selectAll(".growth-line")
+        .transition()
+        .duration(500)
+        .attr("y1", y(1000))
+        .attr("y2", y(49132));
+
+    svg.selectAll(".growth-container text")
+        .text("CAGR: 62.3 %");
   });
 }
 
