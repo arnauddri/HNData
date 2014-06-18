@@ -297,6 +297,23 @@ h3 {
   font-size: 16px;
 }
 
+#sources .source-name {
+  fill: #333;
+  font-family: 'Proxima-Bold';
+  fill: #999;
+  font-size: 16px;
+}
+
+#sources .source-value {
+  font-family: 'Proxima-Bold';
+  fill: #fff;
+  font-size: 16px;
+}
+
+#sources .chevron-up, #sources .chevron-down {
+  cursor: pointer;
+}
+
 /* P4 */
 #share .share {
 	margin-top: 40px;
