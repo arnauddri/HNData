@@ -1,5 +1,5 @@
 var showTopSources = function() {
-  var margin = {top: 20, right: 20, bottom: 50, left: 65},
+  var margin = {top: 20, right: 0, bottom: 50, left: 0},
     width = 750 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
@@ -24,6 +24,8 @@ var showTopSources = function() {
 
   var barHeight = 30;
 
+  var oldGroup = 10;
+
   d3.csv("./data/hori-bar/top_domain_100.csv", function(error, data) {
     data.forEach(function(d) {
       d.value = +d.value;
@@ -34,7 +36,7 @@ var showTopSources = function() {
     var x = d3.scale.linear()
       .range([0, width]);
 
-    x.domain([0, 225]);
+    x.domain([0, 350]);
     y.domain([0, 10]);
 
     // Compute the extent of the data set in age and years.
@@ -58,11 +60,57 @@ var showTopSources = function() {
     source.selectAll("rect")
       .data(function(value, index) { return [data[group][index]] || [0, 0];})
     .enter().append("rect")
-      .attr("y", function(d,i){ return - barHeight / 2; })
+      .attr("y", - barHeight / 2)
       .attr("height", barHeight)
-      .attr("x", 0)
-      .attr("width", function(item, index, i) { console.log(item.value); return d3.max([0,x(item.value)]); })
+      .attr("x", 200)
+      .attr("width", function(item, index, i) { return d3.max([0,x(item.value)]); })
       .attr("fill", "#D9773F");
+
+    source.selectAll("text")
+      .data(function(value, index) { return [data[group][index]] || [0, 0];})
+    .enter().append("text")
+      .attr("class", "source-name")
+      .attr("y", 5)
+      .attr("x", 190)
+      .style("text-anchor", "end")
+      .text(function(item) { return item.key; });
+
+    source.selectAll(".source-value")
+      .data(function(value, index) { return [data[group][index]] || [0, 0];})
+    .enter().append("text")
+      .attr("class", "source-value")
+      .attr("y", 5)
+      .attr("x", function(item, index, i) { return d3.max([0,x(item.value) + 190]); })
+      .style("text-anchor", "end")
+      .text(function(item) { return item.value; });
+
+    var imgs = svg.selectAll("image").data([0]);
+    imgs.enter()
+        .append("image")
+        .attr("class","chevron-up")
+        .attr("xlink:href","images/chevron_up.png")
+        .attr("x", width - 100)
+        .attr("y", 20)
+        .attr("width", "20")
+        .attr("height", "20")
+        .on("click", function() {
+          group = Math.max(group0, group + 10);
+          update();
+        });
+
+    var imgs_down = svg
+        .append("image")
+        .attr("class","chevron-down")
+        .attr("xlink:href","images/chevron_down.png")
+        .attr("x", width - 100)
+        .attr("y", 60)
+        .attr("width", "20")
+        .attr("height", "20")
+        .on("click", function() {
+          group = Math.max(group0, group - 10);
+          update();
+        });
+
 
     // Allow the arrow keys to change the displayed year.
     window.focus();
@@ -75,17 +123,38 @@ var showTopSources = function() {
     });
 
     function update() {
-
-      // sources.transition()
-      //     .duration(750)
-      //     .attr("transform", "translate(0," + (y(20)) +")");
+      if (group === oldGroup) return;
+      console.log(group);
 
       source.selectAll("rect")
         .data(function(value, index) { return [data[group][index]] || [0, 0];})
         .transition()
           .duration(750)
-          .attr("x", 0)
-          .attr("width", function(item, index, i) { return d3.max([0,x(item.value)]); })
+          .attr("width", function(item, index, i) { return d3.max([0,x(item.value)]); });
+
+      source.selectAll("text")
+        .data(function(value, index) { return [data[group][index]] || [0, 0];})
+        .transition()
+        .duration(200)
+        .style("opacity", 0)
+        .text(function(item) { return item.key; });
+
+      source.selectAll("text")
+        .data(function(value, index) { return [data[group][index]] || [0, 0];})
+        .text(function(item) { return item.key; })
+        .transition()
+        .delay(100)
+        .duration(200)
+        .style("opacity", 1);
+
+    source.selectAll(".source-value")
+      .data(function(value, index) { return [data[group][index]] || [0, 0];})
+      .transition()
+      .duration(750)
+      .attr("x", function(item, index, i) { return d3.max([0,x(item.value) + 190]); })
+      .text(function(item) { return item.value; });
+
+      oldGroup = group;
     }
   });
 }
