@@ -149,6 +149,7 @@ var submissionChart = function() {
 
     x.domain(data.map(function(d) { return d.Quarter; }));
     y.domain([0, d3.max(data, function(d) { return d.total; })]);
+
     svg.selectAll(".bar.submissions")
         .transition()
         .duration(500)
@@ -169,6 +170,23 @@ var submissionChart = function() {
     svg.selectAll(".growth-container text")
         .text("CAGR: 54.3 %");
 
+    svg.selectAll(".y.axis").call(yAxis);
+
+    // Remove the y axis for update
+    svg.selectAll('.y.axis')
+        .transition()
+        .duration(300)
+        .attr("transform", "translate(" + width + "," + 2 * height + ")")
+        .remove();
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + width + "," + -2 * height + ")")
+        .transition()
+        .delay(50)
+        .attr("transform", "translate(" + width + ", 0)")
+        .call(yAxis);
+
   });
 }
 
@@ -176,6 +194,7 @@ var activeUserChart = function() {
   d3.csv("./data/bar/active_users.csv", type, function(error, data) {
     x.domain(data.map(function(d) { return d.Quarter; }));
     y.domain([0, d3.max(data, function(d) { return d.Users; })]);
+
     svg.selectAll(".userbar")
         .data(data)
       .enter().append("rect")
@@ -201,11 +220,27 @@ var activeUserChart = function() {
     svg.selectAll(".growth-line")
         .transition()
         .duration(500)
+        .attr("x1", x("Q1 '07"))
         .attr("y1", y(1000))
         .attr("y2", y(49132));
 
     svg.selectAll(".growth-container text")
         .text("CAGR: 62.3 %");
+
+    // Remove the y axis for update
+    svg.selectAll('.y.axis')
+        .transition()
+        .duration(300)
+        .attr("transform", "translate(" + width + "," + -2 * height + ")")
+        .remove();
+
+  svg.append("g")
+        .attr("class", "y axis")
+        .attr("transform", "translate(" + width + "," + 2 * height + ")")
+        .transition()
+        .delay(50)
+        .attr("transform", "translate(" + width + ", 0)")
+        .call(yAxis);
   });
 }
 
