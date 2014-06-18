@@ -17,16 +17,16 @@ $('#p1 .next').click(function() {
   isTopKeywordsShown = true;
 });
 
-$('#p2 .next').click(function() {
-  if (isTopSourcesShown) return;
+// $('#p2 .next').click(function() {
+//   if (isTopSourcesShown) return;
   
   showTopSources();
-  isTopSourcesShown = true;
-});
+//   isTopSourcesShown = true;
+// });
 
-// $('#p3 .next').click(function() {
-//   if (isKarmaShown) return;
+$('#p3 .next').click(function() {
+  if (isKarmaShown) return;
   
   showUserKarma();
-//   isKarmaShown = true;
-// });
+  isKarmaShown = true;
+});

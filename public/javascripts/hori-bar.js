@@ -9,9 +9,6 @@ var showTopSources = function() {
   var y = d3.scale.linear()
       .rangeRound([height, 0]);
 
-  var color = d3.scale.ordinal()
-      .range(["#D9773F", "#f09765"]);
-
   var xAxis = d3.svg.axis()
       .scale(x)
       .orient("bottom");
@@ -22,63 +19,73 @@ var showTopSources = function() {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  var barHeight = 20;
+  var sources = svg.append("g")
+        .attr("class", "sources");
 
-  d3.csv("./data/hori-bar/top_sources.csv", function(error, data) {
+  var barHeight = 30;
+
+  d3.csv("./data/hori-bar/top_domain_100.csv", function(error, data) {
     data.forEach(function(d) {
       d.value = +d.value;
+      d.group = +d.group;
+      d.index = +d.index;
     });
+
     var x = d3.scale.linear()
-      .range([0, width - 100]);
+      .range([0, width]);
 
-    x.domain([0, d3.max(data, function(d) { return d.value; })]);
+    x.domain([0, 225]);
+    y.domain([0, 10]);
 
-    svg.append("g")
-        .attr("class", "bar-container").selectAll(".bar")
-        .data(data)
-      .enter().append("rect")
-        .attr("class", "bar")
-        .attr("transform", function(d, i) { var ypos = height - (i-1) * barHeight; return "translate(" + 0.2 * width + "," + ypos + ")"; })
-        .attr("width", function(d) { return 0; })
-        .attr("height", barHeight - 1)
-        .style("fill", function(d) { return color(d.name); });
+    // Compute the extent of the data set in age and years.
+    var index1 = d3.max(data, function(d) { return d.index; }),
+        group0 = d3.min(data, function(d) { return d.group; }),
+        group1 = d3.max(data, function(d) { return d.group; }),
+        group = 10;
 
-    svg.selectAll(".bar")
-        .data(data)
+    // Produce a map from year and birthyear to [male, female].
+    data = d3.nest()
+        .key(function(d) { return d.group; })
+        .map(data);
+
+
+    var source = sources.selectAll(".source")
+      .data(d3.range(group, group + 10, 1))
+    .enter().append("g")
+      .attr("class", "source")
+      .attr("transform", function(value,index,i) { return "translate(0, " + y(index) + ")"; });
+
+    source.selectAll("rect")
+      .data(function(value, index) { return [data[group][index]] || [0, 0];})
+    .enter().append("rect")
+      .attr("y", function(d,i){ return - barHeight / 2; })
+      .attr("height", barHeight)
+      .attr("x", 0)
+      .attr("width", function(item, index, i) { console.log(item.value); return d3.max([0,x(item.value)]); })
+      .attr("fill", "#D9773F");
+
+    // Allow the arrow keys to change the displayed year.
+    window.focus();
+    d3.select(window).on("keydown", function() {
+      switch (d3.event.keyCode) {
+        case 37: group = Math.max(group0, group - 10); break;
+        case 39: group = Math.min(group1, group + 10); break;
+      }
+      update();
+    });
+
+    function update() {
+
+      // sources.transition()
+      //     .duration(750)
+      //     .attr("transform", "translate(0," + (y(20)) +")");
+
+      source.selectAll("rect")
+        .data(function(value, index) { return [data[group][index]] || [0, 0];})
         .transition()
-        .duration(1000)
-        .attr("width", function(d) { return x(d.value); });
-
-    svg.append("g")
-        .attr("class", "legend-container")
-        .selectAll(".legend")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("class", "legend")
-        .attr("x", function(d) { return 120; })
-        .style("text-anchor", "end")
-        .attr("y", barHeight / 2 + 4)
-        .attr("transform", function(d, i) { var ypos = height - (i-1) * barHeight ; return "translate(0," + ypos + ")"; })
-        .text(function(d) { return d.key; });
-
-    svg.append("g")
-        .attr("class", "value-container")
-        .selectAll(".value")
-        .data(data)
-        .enter()
-        .append("text")
-        .attr("class", "value")
-        .attr("x", function(d) { return x(d.value) + 120; })
-        .style("text-anchor", "end")
-        .style("fill", "#fff")
-        .attr("y", barHeight / 2 + 4)
-        .attr("transform", function(d, i) { var ypos = height - (i-1) * barHeight ; return "translate(0," + ypos + ")"; })
-        .text(function(d) { return d.value; });
+          .duration(750)
+          .attr("x", 0)
+          .attr("width", function(item, index, i) { return d3.max([0,x(item.value)]); })
+    }
   });
-
-  function type(d) {
-    d.Users = +d.Users;
-    return d;
-  }
 }
